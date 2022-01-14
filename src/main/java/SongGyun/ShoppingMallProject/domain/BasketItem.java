@@ -4,10 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -18,4 +15,20 @@ public class BasketItem {
     @GeneratedValue
     @Column(name = "basketItem_id")
     private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL , fetch =  FetchType.LAZY)
+    @JoinColumn(name = "item_id")
+    private Item item;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "basket_id")
+    private Basket basket;
+
+    private int orderCount;
+
+    //==연관관계 편의 메소드==//
+
+
+    //==비즈니스 로직==//
+
 }

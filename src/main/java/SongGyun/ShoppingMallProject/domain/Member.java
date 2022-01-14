@@ -1,14 +1,15 @@
 package SongGyun.ShoppingMallProject.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
@@ -20,33 +21,32 @@ public class Member {
     private String loginId;
     private String password;
     private String email;
-    private String authenticationKey;
     private String phoneNum;
+    private String authenticationKey;   //이메일 인증키키    private String phoneNum;
     private String address;
     private int postCode;
     private int cash;
 
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    /*
-    @OneToMany
+    @OneToMany(mappedBy = "member" , cascade = CascadeType.ALL)
     private List<Order> orderList = new ArrayList<>();
 
-    @OneToMany
-    private List<Qa> QaList = new ArrayList<>();
-
-    @OneToMany
-    private List<Notice> noticeList = new ArrayList<>();
-
-    @OneToOne
-    private Basket basket;
-
-    @OneToMany
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
 
-     */
+    @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    @JoinColumn(name = "basket_id")
+    private Basket basket;
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    private List<Qa> qaList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    private List<Notice> noticeList = new ArrayList<>();
+
+
     @Builder
     public Member(Long id , String name , String loginId , String password , String email, Role role,
                   String phoneNum , String address , int postCode , int cash , String authenticationKey){
@@ -62,6 +62,8 @@ public class Member {
         this.postCode = postCode;
         this.cash = cash;
     }
+
+
 
     //==연관관계 편의 메소드==//
 

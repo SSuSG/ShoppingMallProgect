@@ -21,7 +21,7 @@ public class Category {
     private String categoryName;
     private String code;
 
+    //==연관관계 편의 메소드==//
 
-
-
+    //==비즈니스 로직==//
 }

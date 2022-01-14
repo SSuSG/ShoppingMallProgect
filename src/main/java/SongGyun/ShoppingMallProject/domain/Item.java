@@ -30,10 +30,15 @@ public class Item {
     private int threeCount;
     private int fourCount;
     private int fiveCount;
+
     //private int totalCount;   //총 평가인원수
 
     @OneToOne
     private Category category;
+
+    //==연관관계 편의 메소드==//
+
+    //==비즈니스 로직==//
 
 
 
