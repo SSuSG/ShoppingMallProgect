@@ -1,8 +1,7 @@
 package SongGyun.ShoppingMallProject.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import SongGyun.ShoppingMallProject.dto.OrderItemDto;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +9,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
     @Id
@@ -24,6 +25,15 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public OrderItemDto toDto(OrderItem orderItem){
+        return OrderItemDto.builder()
+                .id(id)
+                .orderId(order.getId())
+                .itemId(item.getId())
+                .itemName(item.getItemName())
+                .build();
+    }
 
     //==연관관계 편의 메소드==//
 

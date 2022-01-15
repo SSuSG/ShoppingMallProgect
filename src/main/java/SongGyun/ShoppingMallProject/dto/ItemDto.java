@@ -1,23 +1,15 @@
-package SongGyun.ShoppingMallProject.domain;
+package SongGyun.ShoppingMallProject.dto;
 
-import SongGyun.ShoppingMallProject.dto.ItemDto;
-import lombok.*;
+import SongGyun.ShoppingMallProject.domain.Item;
+import SongGyun.ShoppingMallProject.domain.ItemStatus;
+import lombok.Builder;
+import lombok.Getter;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Item {
+public class ItemDto {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "item_id")
     private Long id;
-
     private String itemName;        //상품명
     private String size;            //상품사이즈
     private String imagePath;       //상품 이미지
@@ -33,26 +25,8 @@ public class Item {
     private int fourCount;
     private int fiveCount;
 
-    //private int totalCount;   //총 평가인원수
-
-    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
-    private List<Qa> qaList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
-    private List<BasketItem> basketItemList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
-    private List<Review> reviewList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
-    private List<OrderItem> orderItemList = new ArrayList<>();
-
-    @OneToOne
-    private Category category;
-
-
-    public ItemDto toDto(Item item) {
-        return ItemDto.builder()
+    public Item toEntity(){
+        return Item.builder()
                 .id(id)
                 .itemName(itemName)
                 .size(size)
@@ -69,13 +43,6 @@ public class Item {
                 .fourCount(fourCount)
                 .fiveCount(fiveCount)
                 .build();
-    }
-
-
-    //==비즈니스 로직==//
-    public void setOrderItem(OrderItem orderItem){
-        this.orderItemList.add(orderItem);
-        orderItem.setItem(this);
     }
 
 }

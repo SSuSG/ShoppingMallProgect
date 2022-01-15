@@ -1,16 +1,14 @@
 package SongGyun.ShoppingMallProject.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Notice {
+public class Notice extends TimeEntity{
     @Id
     @GeneratedValue
     @Column(name = "notice_id")
@@ -24,7 +22,10 @@ public class Notice {
     private Member member;
 
     //==연관관계 편의 메소드==//
-
+    public void setMember(Member member){
+        this.member = member;
+        member.getNoticeList().add(this);
+    }
 
 
 

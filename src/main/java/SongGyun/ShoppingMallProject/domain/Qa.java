@@ -1,16 +1,15 @@
 package SongGyun.ShoppingMallProject.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import SongGyun.ShoppingMallProject.dto.QaDto;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Qa {
+public class Qa extends TimeEntity{
     @Id
     @GeneratedValue
     @Column(name = "qa_id")
@@ -18,6 +17,7 @@ public class Qa {
 
     private String title;
     private String contents;
+    private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -27,11 +27,34 @@ public class Qa {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    public QaDto toDto(){
+        return QaDto.builder()
+                .id(id)
+                .itemId(item.getId())
+                .title(title)
+                .contents(contents)
+                .answer(answer)
+                .build();
+
+    }
+
+
+
 
     //==연관관계 편의 메소드==//
+    public void setMember(Member member){
+        this.member = member;
+        member.getQaList().add(this);
+    }
 
+    public void setItem(Item item){
+        this.item = item;
+        item.getQaList().add(this);
+    }
 
-
+    public void setAnswer(String answer){
+        this.answer = answer;
+    }
 
     //==비즈니스 로직==//
 

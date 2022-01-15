@@ -25,6 +25,15 @@ public class Basket {
 
 
     //==연관관계 편의 메소드==//
+    public void setMember(Member member){
+        this.member = member;
+        member.setBasket(this);
+    }
+
+    public void setBasketItem(BasketItem basketItem){
+        this.getBasketItemList().add(basketItem);
+        basketItem.setBasket(this);
+    }
 
 
     //==비즈니스 로직==//

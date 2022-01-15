@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Review {
+public class Review extends TimeEntity{
     @Id
     @GeneratedValue
     @Column(name = "review_id")
@@ -30,6 +30,16 @@ public class Review {
     private String contents;
 
     //==연관관계 편의 메소드==//
+    public void setMember(Member member){
+        this.member = member;
+        member.getReviewList().add(this);
+    }
+
+    public void setItem(Item item){
+        this.item = item;
+        item.getReviewList().add(this);
+    }
+
 
     //==비즈니스 로직==//
 }

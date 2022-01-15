@@ -1,5 +1,6 @@
 package SongGyun.ShoppingMallProject.domain;
 
+import SongGyun.ShoppingMallProject.dto.MemberDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends TimeEntity{
     @Id
     @GeneratedValue
     @Column(name = "member_id")
@@ -63,7 +64,19 @@ public class Member {
         this.cash = cash;
     }
 
-
+    public MemberDto toDto(Member member){
+        return MemberDto.builder()
+                .id(id)
+                .name(name)
+                .loginId(loginId)
+                .password(password)
+                .address(address)
+                .postCode(postCode)
+                .cash(cash)
+                .phoneNum(phoneNum)
+                .email(email)
+                .role(role).build();
+    }
 
     //==연관관계 편의 메소드==//
 
@@ -71,4 +84,10 @@ public class Member {
 
 
     //==비즈니스 로직==//
+
+    //유저의 가입상태에 따른 role udpate
+    //가입을 하고 이메일 인증을하면 준회원 -> 정회원
+    public void updateRoleTypeForJoin() {
+        this.role = Role.NORMAL;
+    }
 }
