@@ -36,7 +36,7 @@ public class Order extends TimeEntity{
     private Delivery delivery;
 
 
-    public OrderDto toDto(Order order) {
+    public OrderDto toDto() {
         return OrderDto.builder()
                 .id(id)
                 .orderStatus(orderStatus)

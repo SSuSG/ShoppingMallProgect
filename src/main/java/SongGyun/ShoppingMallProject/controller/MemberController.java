@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class MemberController {
     private final OrderService orderService;
     private final NoticeService noticeService;
     private final QaService qaService;
+    private final ReviewService reviewService;
 
     //회원가입
     @PostMapping("/join")
@@ -133,45 +136,62 @@ public class MemberController {
 
     //리뷰작성
     @PostMapping("")
-    public void writeReview(){
+    public void writeReview(
+            @RequestBody WriteReviewDto writeReviewDto,
+            @Login Member loginMember
+    ){
         log.info("memberController : writeReview");
+        reviewService.createReview(writeReviewDto , loginMember.getId());
     }
 
-
-
-
-
-    /*
-    //내정보
+    //내정보조회
     @GetMapping("/mypage")
-    public Member viewMyPage(){
+    public MemberDto viewMyPage(@Login Member loginMember){
         log.info("memberController : viewMyPage");
+        return memberService.findMember(loginMember.getId());
     }
-
 
     //회원정보수정
+    //리턴값 고민!
     @PostMapping("/mypage/update")
-    public UpdateMemberDto updateMember(){
+    public void updateMember(
+            @RequestBody UpdateMemberDto updateMemberDto,
+            @Login Member loginMember
+    ){
         log.info("memberController : updateMember");
+        memberService.updateMember(loginMember.getId(), updateMemberDto);
     }
 
     //회원탈퇴
     @PostMapping("/mypage/resign")
-    public void resign(){
+    public void resign(@Login Member loginMember , HttpServletRequest request){
         log.info("memberController : resign");
+        memberService.deleteMember(loginMember.getId());
+
+        //로그아웃
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
     }
 
     //충전하기
     @PostMapping("/mypage/cash")
-    public void chargeCash(){
+    public void chargeCash(
+            @RequestBody int cash,
+            @Login Member loginMember
+    ){
         log.info("memberController : chargeCash");
+        memberService.chargeCash(loginMember.getId(), cash);
     }
-
 
     //내 주문내역 조회
     @GetMapping("/mypage/orders")
-    public OrderDto viewMyOrder(){
+    public List<OrderDto> viewMyOrder(
+            @Login Member loginMember
+    ) {
         log.info("memberController : viewMyOrder");
+        return memberService.findMemberOrders(loginMember.getId());
     }
 
     //내 qa내역 조회
@@ -183,9 +203,17 @@ public class MemberController {
 
     //내 리뷰 조회
     @GetMapping("/mypage/review")
-    public ReviewDto viewMyReview(){
+    public List<ReviewDto> viewMyReview(
+            @Login Member loginMember
+    ){
         log.info("memberController : viewMyReview");
+        return memberService.findMemberReviews(loginMember.getId());
     }
+
+    /*
+
+
+
 
 
     //장바구니 담기

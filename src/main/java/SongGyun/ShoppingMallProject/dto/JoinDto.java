@@ -44,6 +44,7 @@ public class JoinDto {
                 .email(email)
                 .phoneNum(phoneNum)
                 .role(Role.BEFORE)
+                .cash(0)
                 .build();
         return member;
     }

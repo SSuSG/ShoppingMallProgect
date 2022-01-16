@@ -1,10 +1,7 @@
 package SongGyun.ShoppingMallProject.service;
 
 import SongGyun.ShoppingMallProject.domain.Member;
-import SongGyun.ShoppingMallProject.dto.FindLoginIdDto;
-import SongGyun.ShoppingMallProject.dto.FindPasswordDto;
-import SongGyun.ShoppingMallProject.dto.JoinDto;
-import SongGyun.ShoppingMallProject.dto.MemberDto;
+import SongGyun.ShoppingMallProject.dto.*;
 import SongGyun.ShoppingMallProject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +9,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,6 +31,7 @@ public class MemberService {
     }
 
     //이메일 인증
+    @Transactional
     public boolean IsEqualAuthenticationKey(Long id, String authenticationKey) {
         log.info("memberService : IsEqualAuthenticationKey");
         Member member = memberRepository.findById(id).get();
@@ -80,7 +77,7 @@ public class MemberService {
         log.info("memberService : findAllMembers");
         List<MemberDto> memberDtoList =
                 memberRepository.findAll().
-                stream().map(member -> member.toDto(member)).
+                stream().map(member -> member.toDto()).
                 collect(Collectors.toList());
         return memberDtoList;
     }
@@ -95,4 +92,41 @@ public class MemberService {
         }
         return false;
     }
+
+    //내정보 조회
+    public MemberDto findMember(Long id){
+        log.info("memberService : findMember");
+        return memberRepository.findById(id).get().toDto();
+    }
+
+    // 내정보 수정
+    @Transactional
+    public void updateMember(Long id, UpdateMemberDto updateMemberDto){
+        memberRepository.findById(id).get().updateMemberInfo(updateMemberDto);
+    }
+
+    //회원탈퇴
+    @Transactional
+    public void deleteMember(Long id){
+        memberRepository.deleteById(id);
+    }
+
+    //캐쉬충전
+    @Transactional
+    public void chargeCash(Long id , int cash){
+        memberRepository.findById(id).get().chargeCash(cash);
+    }
+
+    //내 주문내역 조회
+    public List<OrderDto> findMemberOrders(Long id){
+        return memberRepository.findById(id).get().getOrderList().
+                stream().map(o -> o.toDto()).collect(Collectors.toList());
+    }
+
+    //내 리뷰 조회
+    public List<ReviewDto> findMemberReviews(Long id){
+        return memberRepository.findById(id).get().getReviewList().
+                stream().map(r -> r.toDto()).collect(Collectors.toList());
+    }
+
 }

@@ -1,6 +1,9 @@
 package SongGyun.ShoppingMallProject.domain;
 
+import SongGyun.ShoppingMallProject.dto.ReviewDto;
+import SongGyun.ShoppingMallProject.dto.WriteReviewDto;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Review extends TimeEntity{
     @Id
@@ -29,6 +33,16 @@ public class Review extends TimeEntity{
     private String title;
     private String contents;
 
+    public ReviewDto toDto(){
+        return ReviewDto.builder()
+                .id(id)
+                .itemId(item.getId())
+                .rating(rating)
+                .title(title)
+                .contents(contents)
+                .build();
+    }
+
     //==연관관계 편의 메소드==//
     public void setMember(Member member){
         this.member = member;
@@ -39,7 +53,6 @@ public class Review extends TimeEntity{
         this.item = item;
         item.getReviewList().add(this);
     }
-
 
     //==비즈니스 로직==//
 }

@@ -22,7 +22,7 @@ public class OrderService {
     public List<OrderDto> findAllOrders() {
         log.info("OrderService : findAllOrders");
         return orderRepository.findAll()
-                .stream().map(order -> order.toDto(order))
+                .stream().map(order -> order.toDto())
                 .collect(Collectors.toList());
     }
 

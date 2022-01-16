@@ -8,6 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Getter
+@Builder
 public class MemberDto {
 
     private Long id;
@@ -23,18 +24,5 @@ public class MemberDto {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Builder
-    public MemberDto(Long id , String name , String loginId , String password , String email , String phoneNum
-    , String address , int postCode , int cash , Role role){
-        this.id = id;
-        this.name = name;
-        this.loginId = loginId;
-        this.password = password;
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.address = address;
-        this.postCode = postCode;
-        this.cash = cash;
-        this.role = role;
-    }
+
 }

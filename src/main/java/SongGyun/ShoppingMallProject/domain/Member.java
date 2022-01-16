@@ -1,6 +1,7 @@
 package SongGyun.ShoppingMallProject.domain;
 
 import SongGyun.ShoppingMallProject.dto.MemberDto;
+import SongGyun.ShoppingMallProject.dto.UpdateMemberDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends TimeEntity{
     @Id
@@ -48,23 +50,7 @@ public class Member extends TimeEntity{
     private List<Notice> noticeList = new ArrayList<>();
 
 
-    @Builder
-    public Member(Long id , String name , String loginId , String password , String email, Role role,
-                  String phoneNum , String address , int postCode , int cash , String authenticationKey){
-        this.id = id;
-        this.name = name;
-        this.loginId = loginId;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.authenticationKey = authenticationKey;
-        this.phoneNum = phoneNum;
-        this.address = address;
-        this.postCode = postCode;
-        this.cash = cash;
-    }
-
-    public MemberDto toDto(Member member){
+    public MemberDto toDto(){
         return MemberDto.builder()
                 .id(id)
                 .name(name)
@@ -84,6 +70,23 @@ public class Member extends TimeEntity{
 
 
     //==비즈니스 로직==//
+
+    //회원정보수정
+    public void updateMemberInfo(UpdateMemberDto updateMemberDto){
+        this.name = updateMemberDto.getName();;
+        this.loginId = updateMemberDto.getLoginId();
+        this.password = updateMemberDto.getPassword();
+        this.address = updateMemberDto.getAddress();
+        this.phoneNum = updateMemberDto.getPhoneNum();
+        this.email = updateMemberDto.getEmail();
+        this.postCode = updateMemberDto.getPostCode();
+    }
+
+    //캐쉬충전
+    public void chargeCash(int cash){
+        this.cash = cash;
+    }
+
 
     //유저의 가입상태에 따른 role udpate
     //가입을 하고 이메일 인증을하면 준회원 -> 정회원
