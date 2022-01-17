@@ -1,0 +1,21 @@
+.header-top{
+    display: flex;
+    height : 30px;
+    border-bottom: 1px solid #d6d6d6;
+    padding-left : 150px;
+    padding-right : 150px;
+    align-items: center;
+}
+
+.header-left ul{
+    display: flex;
+}
+.header-left li{
+    list-style: none;
+    padding-right : 8px;
+}
+.header-right{
+    position: absolute;
+    top : 0px;
+    right : 150px;
+}

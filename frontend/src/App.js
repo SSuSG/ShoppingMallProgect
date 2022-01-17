@@ -1,7 +1,10 @@
-import logo from './logo.svg';
 import React, {useEffect, useState} from 'react';
 import './App.css';
-
+import Header from './Header';
+import Title from './Title';
+import Nav from './Nav';
+import {Link, Route, Switch} from 'react-router-dom';
+import Login from './Login';
 function App() {
   const [message, setMessage] = useState("");
   useEffect(() => {
@@ -13,13 +16,15 @@ function App() {
   },[])
   return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <h1 className="App-title">{message}</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header />
+        <Title />
+        <Nav />
+				<Route exact path="/">
+					
+				</Route>
+				<Route path="/login">
+					<Login />
+				</Route>
       </div>
   )
 }
