@@ -5,15 +5,17 @@ import Title from './Title';
 import Nav from './Nav';
 import {Link, Route, Switch} from 'react-router-dom';
 import Login from './Login';
+import Join from './Join';
+
 function App() {
-  const [message, setMessage] = useState("");
-  useEffect(() => {
-    fetch('/api/hello')
-        .then(response => response.text())
-        .then(message => {
-          setMessage(message);
-        });
-  },[])
+  // const [message, setMessage] = useState("");
+  // useEffect(() => {
+  //   fetch('/api/hello')
+  //       .then(response => response.text())
+  //       .then(message => {
+  //         setMessage(message);
+  //       });
+  // },[])
   return (
       <div className="App">
         <Header />
@@ -25,6 +27,9 @@ function App() {
 				<Route path="/login">
 					<Login />
 				</Route>
+        <Route path="/join">
+          <Join />
+        </Route>
       </div>
   )
 }
