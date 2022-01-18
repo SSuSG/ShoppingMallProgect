@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Member extends TimeEntity{
     @Id
     @GeneratedValue
@@ -49,6 +49,10 @@ public class Member extends TimeEntity{
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Notice> noticeList = new ArrayList<>();
 
+    public Member() {
+
+    }
+
 
     public MemberDto toDto(){
         return MemberDto.builder()
@@ -70,6 +74,23 @@ public class Member extends TimeEntity{
 
 
     //==비즈니스 로직==//
+
+    //회원가입
+    //postcode ,address추가해야함!
+    public Member createMemberForJoin(
+            String name , String loginId ,String password , String email, String phoneNum , String authenticationKey,
+            int cash , Role role
+    ){
+        return Member.builder()
+                .name(name)
+                .loginId(loginId)
+                .password(password)
+                .email(email)
+                .phoneNum(phoneNum)
+                .authenticationKey(authenticationKey)
+                .cash(cash)
+                .role(role).build();
+    }
 
     //회원정보수정
     public void updateMemberInfo(UpdateMemberDto updateMemberDto){

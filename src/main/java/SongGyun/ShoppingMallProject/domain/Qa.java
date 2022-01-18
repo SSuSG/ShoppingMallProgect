@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Qa extends TimeEntity{
     @Id
     @GeneratedValue
@@ -26,6 +26,10 @@ public class Qa extends TimeEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public Qa() {
+
+    }
 
     public QaDto toDto(){
         return QaDto.builder()

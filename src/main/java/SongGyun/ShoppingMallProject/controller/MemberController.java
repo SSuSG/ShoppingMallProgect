@@ -33,6 +33,7 @@ public class MemberController {
             //오류가있으면
             log.info("memberController : createUser오류");
         }
+        log.info("{}" , joinDto.getLoginId());
         //중복가입방지
         if(!memberService.validateDuplicateUser(joinDto)){
             memberService.join(joinDto);
@@ -50,13 +51,13 @@ public class MemberController {
     }
 
     //이메일 인증
-    @GetMapping("/join/mail")
+    @PostMapping("/join/mail")
     public boolean authenticationEmail(
             @Login Member loginMember,
-            @RequestBody String authenticationKey
+            @RequestBody AuthenticationKeyDto authenticationKeyDto
     ){
         log.info("memberController : authenticationEmail");
-        return memberService.IsEqualAuthenticationKey(loginMember.getId(), authenticationKey);
+        return memberService.IsEqualAuthenticationKey(loginMember.getId(), authenticationKeyDto.getAuthenticationKey());
     }
 
     //아이디 찾기
@@ -120,14 +121,14 @@ public class MemberController {
     }
 
     //QA작성
-    @PostMapping("")
+    //@PostMapping("")
     public void writeQa(@RequestBody WriteQaDto writeQaDto , @Login Member loginMember){
         log.info("memberController : writeQa");
         qaService.createQa(writeQaDto, loginMember);
     }
 
     //QA상세조회
-    @PostMapping("")
+    //@PostMapping("")
     public QaDto viewMyQa(@RequestBody Long id){
         log.info("memberController : viewMyQa");
         return qaService.readQa(id);
@@ -135,7 +136,7 @@ public class MemberController {
 
 
     //리뷰작성
-    @PostMapping("")
+    //@PostMapping("")
     public void writeReview(
             @RequestBody WriteReviewDto writeReviewDto,
             @Login Member loginMember
@@ -210,17 +211,20 @@ public class MemberController {
         return memberService.findMemberReviews(loginMember.getId());
     }
 
+    //장바구니 담기
+    @PostMapping("/basket")
+    public void addToBasket(){
+        log.info("memberController : addToBasket");
+
+    }
+
     /*
 
 
 
 
 
-    //장바구니 담기
-    @PostMapping("/basket")
-    public void addToBasket(){
-        log.info("memberController : addToBasket");
-    }
+
 
     //장바구니 페이지
     @GetMapping("/basket")

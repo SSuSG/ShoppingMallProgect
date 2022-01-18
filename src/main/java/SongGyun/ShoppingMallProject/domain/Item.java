@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Item {
 
     @Id
@@ -32,8 +32,10 @@ public class Item {
     private int threeCount;
     private int fourCount;
     private int fiveCount;
-
     //private int totalCount;   //총 평가인원수
+
+    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
+    private List<Image> imageList;
 
     @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
     private List<Qa> qaList = new ArrayList<>();
@@ -49,6 +51,9 @@ public class Item {
 
     @OneToOne
     private Category category;
+
+    public Item() {
+    }
 
 
     public ItemDto toDto(Item item) {

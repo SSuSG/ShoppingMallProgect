@@ -2,17 +2,14 @@ package SongGyun.ShoppingMallProject.domain;
 
 import SongGyun.ShoppingMallProject.dto.ReviewDto;
 import SongGyun.ShoppingMallProject.dto.WriteReviewDto;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Review extends TimeEntity{
     @Id
     @GeneratedValue
@@ -32,6 +29,9 @@ public class Review extends TimeEntity{
 
     private String title;
     private String contents;
+
+    public Review() {
+    }
 
     public ReviewDto toDto(){
         return ReviewDto.builder()

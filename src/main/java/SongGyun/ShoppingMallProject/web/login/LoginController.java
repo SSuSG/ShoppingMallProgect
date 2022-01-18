@@ -44,6 +44,7 @@ public class LoginController {
         session.setAttribute(SessionConst.LOGIN_MEMBER , loginUser);
 
         return "로그인성공";
+
         /*
         원래있던 화면으로 돌아갈수있게 해줌
         if(redirectUrl==null)

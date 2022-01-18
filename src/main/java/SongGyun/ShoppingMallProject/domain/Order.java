@@ -2,10 +2,7 @@ package SongGyun.ShoppingMallProject.domain;
 
 import SongGyun.ShoppingMallProject.dto.MemberDto;
 import SongGyun.ShoppingMallProject.dto.OrderDto;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +12,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Order extends TimeEntity{
     @Id
     @GeneratedValue
@@ -34,6 +31,10 @@ public class Order extends TimeEntity{
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
+
+    public Order() {
+
+    }
 
 
     public OrderDto toDto() {

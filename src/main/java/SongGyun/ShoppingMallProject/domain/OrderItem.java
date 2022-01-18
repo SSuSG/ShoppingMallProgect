@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue
@@ -25,6 +25,10 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public OrderItem() {
+
+    }
 
     public OrderItemDto toDto(OrderItem orderItem){
         return OrderItemDto.builder()

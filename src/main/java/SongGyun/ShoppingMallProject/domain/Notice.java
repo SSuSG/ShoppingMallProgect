@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Notice extends TimeEntity{
     @Id
     @GeneratedValue
@@ -20,6 +20,10 @@ public class Notice extends TimeEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public Notice() {
+
+    }
 
     //==연관관계 편의 메소드==//
     public void setMember(Member member){
