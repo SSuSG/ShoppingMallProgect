@@ -4,14 +4,17 @@ import SongGyun.ShoppingMallProject.domain.Member;
 import SongGyun.ShoppingMallProject.dto.*;
 import SongGyun.ShoppingMallProject.service.*;
 import SongGyun.ShoppingMallProject.web.argumentresolver.Login;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -99,8 +102,13 @@ public class MemberController {
     //이미지?
     //상품등록 -> admin만 가능
     @PostMapping("/admin/item")
-    public void registerItem(){
+    public void registerItem(
+            MultipartFile[] multipartFiles,
+            String stringItemDto
+    ) throws IOException {
         log.info("memberController : registerItem");
+
+        itemService.createItem(multipartFiles,stringItemDto);
     }
 
 

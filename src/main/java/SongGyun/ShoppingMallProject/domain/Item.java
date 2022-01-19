@@ -2,6 +2,7 @@ package SongGyun.ShoppingMallProject.domain;
 
 import SongGyun.ShoppingMallProject.dto.ItemDto;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@Slf4j
 @AllArgsConstructor
 public class Item {
 
@@ -35,7 +37,7 @@ public class Item {
     //private int totalCount;   //총 평가인원수
 
     @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
-    private List<Image> imageList;
+    private List<Image> imageList = new ArrayList<>();
 
     @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
     private List<Qa> qaList = new ArrayList<>();
@@ -78,9 +80,20 @@ public class Item {
 
 
     //==비즈니스 로직==//
+
+
+    //==연관 관계 메소드==//
     public void setOrderItem(OrderItem orderItem){
         this.orderItemList.add(orderItem);
         orderItem.setItem(this);
     }
+
+    public void setImage(Image image){
+        image.setItem(this);
+        this.imageList.add(image);
+    }
+
+
+
 
 }
