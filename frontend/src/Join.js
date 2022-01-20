@@ -1,6 +1,7 @@
 import React  from 'react';
 import './Join.css'
 import {Link, Route, Switch} from 'react-router-dom';
+import axios from 'axios';
 
 function Join(props){
     return(
@@ -22,7 +23,7 @@ function Join(props){
 								이메일 <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/ico_required.gif" alt="" /> <input type="text" />
 							</p>
 							<p>
-								휴대폰 번호 <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/ico_required.gif" alt="" /> <input type="text" />
+								휴대폰 번호 <img src="https://img.echosting.cafe24.com/skin/base_ko_KR/member/ico_required.gif" alt="" /> <input type="text" placeholder='010xxxxxxxx' />
 							</p>
 							<input type="submit" value="회원가입" />
 						</form>

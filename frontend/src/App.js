@@ -6,30 +6,27 @@ import Nav from './Nav';
 import {Link, Route, Switch} from 'react-router-dom';
 import Login from './Login';
 import Join from './Join';
+import axios from 'axios';
 
 function App() {
-  // const [message, setMessage] = useState("");
-  // useEffect(() => {
-  //   fetch('/api/hello')
-  //       .then(response => response.text())
-  //       .then(message => {
-  //         setMessage(message);
-  //       });
-  // },[])
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    axios.get('/api/hello')
+        .then((res) => {
+          setMessage(res.data);
+        });
+  },[])
   return (
       <div className="App">
+        
         <Header />
         <Title />
         <Nav />
-				<Route exact path="/">
-					
-				</Route>
-				<Route path="/login">
-					<Login />
-				</Route>
-        <Route path="/join">
-          <Join />
-        </Route>
+        {console.log(message)}
+				<Route exact path="/" />
+				<Route path="/login" component={Login} />
+        <Route path="/join" component={Join} />
+        
       </div>
   )
 }
