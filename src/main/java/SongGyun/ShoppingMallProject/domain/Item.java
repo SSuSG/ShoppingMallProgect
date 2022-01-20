@@ -51,7 +51,8 @@ public class Item {
     @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
     private List<OrderItem> orderItemList = new ArrayList<>();
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Item() {

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -22,12 +23,11 @@ public class Category {
     private String categoryName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "par_category_id")
     private Category parentCategory;
 
     @OneToMany(mappedBy = "parentCategory" , fetch = FetchType.LAZY)
     private List<Category> childCategory;
-
 
     @OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)
     private List<Item> itemList = new ArrayList<>();
@@ -36,3 +36,5 @@ public class Category {
 
     //==비즈니스 로직==//
 }
+
+
