@@ -25,7 +25,7 @@ public class Member extends TimeEntity{
     private String password;
     private String email;
     private String phoneNum;
-    private String authenticationKey;   //이메일 인증키키    private String phoneNum;
+    private String authenticationKey;   //이메일 인증키    private String phoneNum;
     private String address;
     private int postCode;
     private int cash;

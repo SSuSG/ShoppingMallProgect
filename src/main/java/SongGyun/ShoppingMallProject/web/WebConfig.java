@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        /*
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
@@ -20,10 +21,12 @@ public class WebConfig implements WebMvcConfigurer {
                         "/", "/login", "/logout",
                         "/css/**", "/*.ico", "/error", "/join"
                 );
+
+         */
     }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new LoginMemberArgumentResolver());
+        //resolvers.add(new LoginMemberArgumentResolver());
     }
 }

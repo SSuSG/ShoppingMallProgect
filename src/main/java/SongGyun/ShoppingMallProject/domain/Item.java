@@ -51,7 +51,7 @@ public class Item {
     @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
     private List<OrderItem> orderItemList = new ArrayList<>();
 
-    @OneToOne
+    @ManyToOne()
     private Category category;
 
     public Item() {
