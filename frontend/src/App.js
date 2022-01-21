@@ -9,20 +9,20 @@ import Join from './Join';
 import axios from 'axios';
 
 function App() {
-  const [message, setMessage] = useState("");
-  useEffect(() => {
-    axios.get('/api/hello')
-        .then((res) => {
-          setMessage(res.data);
-        });
-  },[])
+  // const [message, setMessage] = useState("");
+  // useEffect(() => {
+  //   axios.get('/admin/members')
+  //       .then((res) => {
+  //         setMessage(res.data);
+  //       });
+  // },[])
   return (
       <div className="App">
         
         <Header />
         <Title />
         <Nav />
-        {console.log(message)}
+        {/* {console.log(message)} */}
 				<Route exact path="/" />
 				<Route path="/login" component={Login} />
         <Route path="/join" component={Join} />
