@@ -11,7 +11,7 @@ import axios from 'axios';
 function App() {
   const [message, setMessage] = useState("");
   useEffect(() => {
-    axios.get('/api/hello')
+    axios.get('/admin/members')
         .then((res) => {
           setMessage(res.data);
         });
