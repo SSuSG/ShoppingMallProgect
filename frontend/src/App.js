@@ -9,6 +9,7 @@ import Join from './Join';
 import axios from 'axios';
 
 function App() {
+<<<<<<< HEAD
   const [message, setMessage] = useState("");
   useEffect(() => {
     axios.get('/admin/members')
@@ -16,13 +17,22 @@ function App() {
           setMessage(res.data);
         });
   },[])
+=======
+  // const [message, setMessage] = useState("");
+  // useEffect(() => {
+  //   axios.get('/admin/members')
+  //       .then((res) => {
+  //         setMessage(res.data);
+  //       });
+  // },[])
+>>>>>>> 40c6a782fb38e2c03f7a35584766451f0959aad6
   return (
       <div className="App">
         
         <Header />
         <Title />
         <Nav />
-        {console.log(message)}
+        {/* {console.log(message)} */}
 				<Route exact path="/" />
 				<Route path="/login" component={Login} />
         <Route path="/join" component={Join} />
