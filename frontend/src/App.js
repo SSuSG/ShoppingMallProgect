@@ -9,7 +9,7 @@ import Join from './Join';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 function App() {
-<<<<<<< HEAD
+
   const [message, setMessage] = useState("");
   useEffect(() => {
     axios.get('/admin/members')
@@ -17,15 +17,7 @@ function App() {
           setMessage(res.data);
         });
   },[])
-=======
-  // const [message, setMessage] = useState("");
-  // useEffect(() => {
-  //   axios.get('/admin/members')
-  //       .then((res) => {
-  //         setMessage(res.data);
-  //       });
-  // },[])
->>>>>>> 40c6a782fb38e2c03f7a35584766451f0959aad6
+
   return (
       <div className="App">
         

@@ -7,6 +7,9 @@
     padding-right : 150px;
     align-items: center;
 }
+.header-left{
+    position : relative;
+}
 
 .header-left ul{
     text-align : center;
@@ -22,6 +25,34 @@
     text-decoration: none;
     color : black;
 }
-.header-right{
-  
+.mypage{
+    cursor : pointer;
+}
+.mypage:hover div{
+    display: inline-block;
+}
+.mypage-detail:hover{
+    display : inline-block;
+}
+.mypage-detail{
+    width: 100px;
+    height: 80px;
+    border: 1px solid #000;
+    position : absolute;
+    top : 15px;
+    right : 32px;
+    text-align: center;
+    vertical-align: center;
+    background-color: white;
+    display: none;
+}
+.mypage-detail ul{
+    display : inline-block;
+    padding : 0;
+    padding-top : 5px;
+}
+.mypage-detail ul li{
+    padding : 0;
+    display : block;
+    padding-bottom: 5px;
 }

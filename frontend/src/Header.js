@@ -11,9 +11,18 @@ function Header(props){
 							<li>
 								<Link to="/login" className="link">로그인</Link>
 							</li>
-							<li>
-								마이페이지
+							<li className="mypage">
+								마이페이지▼
+								<div className='mypage-detail'>
+									<ul>
+										<li>주문조회</li>
+										<li>장바구니</li>
+										<li>관심상품</li>
+										<li>회원정보</li>
+									</ul>
+								</div>
 							</li>
+							
 							<li>
 								장바구니
 							</li>

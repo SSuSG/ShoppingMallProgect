@@ -75,7 +75,9 @@ function Join(props){
 										</td>
 									</tr>
 								</table>
-								<input type="submit" value="회원가입" onClick={()=>{loading변경(true)}}/>
+								<div className='join-button-container'>
+									<input type="submit" value="회원가입" className="join-button" onClick={()=>{loading변경(true)}}/>
+								</div>
 							</form>
 							{ emailModal===true?<EmailModal />:null}
 							<Loading loading={loading} />
