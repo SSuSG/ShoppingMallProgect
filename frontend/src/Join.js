@@ -141,8 +141,10 @@ function Loading(props){
 
 	if(props.loading===true)
 		return(
+		<div className="spinner-top">
 		<div class="spinner-border" role="status">
 			<span class="visually-hidden">Loading...</span>
+		</div>
 		</div>
 		);
 	return null;

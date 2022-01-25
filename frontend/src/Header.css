@@ -56,3 +56,6 @@
     display : block;
     padding-bottom: 5px;
 }
+.mypage-detail ul li:hover{
+    color :red;
+}
