@@ -30,8 +30,6 @@ public class MemberController {
     private final ReviewService reviewService;
 
 
-
-
     //회원가입
     @PostMapping("/join")
     public boolean createMember(@Valid @RequestBody JoinDto joinDto , BindingResult result) throws Exception {
@@ -58,12 +56,16 @@ public class MemberController {
 
     //이메일 인증
     @PostMapping("/join/mail")
-    public boolean authenticationEmail(
+    public String authenticationEmail(
             @Login Member loginMember,
             @RequestBody AuthenticationKeyDto authenticationKeyDto
     ){
         log.info("memberController : authenticationEmail");
-        return memberService.IsEqualAuthenticationKey(loginMember.getId(), authenticationKeyDto.getAuthenticationKey());
+        if(memberService.IsEqualAuthenticationKey(loginMember.getId(), authenticationKeyDto.getAuthenticationKey()) == true){
+            return "200";
+        }else{
+            return "412";
+        }
     }
 
     //아이디 찾기
@@ -106,12 +108,11 @@ public class MemberController {
     //상품등록 -> admin만 가능
     @PostMapping("/admin/item")
     public void registerItem(
-            MultipartFile[] multipartFiles,
-            String stringItemDto
+            @RequestBody ItemDto itemDto
     ) throws IOException {
         log.info("memberController : registerItem");
 
-        itemService.createItem(multipartFiles,stringItemDto);
+        itemService.createItem(itemDto , itemDto.getBase64Images());
     }
 
 

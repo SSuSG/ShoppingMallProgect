@@ -5,6 +5,9 @@ import SongGyun.ShoppingMallProject.domain.ItemStatus;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Builder
 public class ItemDto {
@@ -12,7 +15,7 @@ public class ItemDto {
     private Long id;
     private String itemName;        //상품명
     private String size;            //상품사이즈
-    private String imagePath;       //상품 이미지
+    private List<ImageDto> base64Images;
     private String color;           //상품 컬러
     private String itemInfo;        //상품 상세 설명
     private int price;              //상품 가격
@@ -30,10 +33,10 @@ public class ItemDto {
                 .id(id)
                 .itemName(itemName)
                 .size(size)
-                .imagePath(imagePath)
                 .color(color)
                 .itemInfo(itemInfo)
                 .price(price)
+                .imageList(new ArrayList<>())
                 .stockQuantity(stockQuantity)
                 .itemStatus(itemStatus)
                 .ratingAverage(ratingAverage)
@@ -43,6 +46,16 @@ public class ItemDto {
                 .fourCount(fourCount)
                 .fiveCount(fiveCount)
                 .build();
+    }
+
+    public void setImageDtoList(List<ImageDto> imageDtoList){
+        this.base64Images = new ArrayList<>();
+
+        for (ImageDto imageDto : imageDtoList) {
+            this.base64Images.add(imageDto);
+        }
+
+
     }
 
 }

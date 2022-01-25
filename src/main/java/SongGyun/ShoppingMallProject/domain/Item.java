@@ -59,12 +59,11 @@ public class Item {
     }
 
 
-    public ItemDto toDto(Item item) {
+    public ItemDto toDto() {
         return ItemDto.builder()
                 .id(id)
                 .itemName(itemName)
                 .size(size)
-                .imagePath(imagePath)
                 .color(color)
                 .itemInfo(itemInfo)
                 .price(price)

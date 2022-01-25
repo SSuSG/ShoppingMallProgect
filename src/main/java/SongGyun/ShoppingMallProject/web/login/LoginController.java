@@ -2,6 +2,7 @@ package SongGyun.ShoppingMallProject.web.login;
 
 
 import SongGyun.ShoppingMallProject.domain.Member;
+import SongGyun.ShoppingMallProject.domain.Role;
 import SongGyun.ShoppingMallProject.dto.LoginDto;
 import SongGyun.ShoppingMallProject.web.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -37,13 +38,17 @@ public class LoginController {
 
         if(loginUser == null){
             bindingResult.reject("loginFail" , "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "오류";   //다시 로그인화면으로
+            return "412";   //다시 로그인화면으로
         }
 
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER , loginUser);
 
-        return "로그인성공";
+        if(loginUser.getRole() == Role.BEFORE){
+            return "300";
+        }
+
+        return "200";
 
         /*
         원래있던 화면으로 돌아갈수있게 해줌

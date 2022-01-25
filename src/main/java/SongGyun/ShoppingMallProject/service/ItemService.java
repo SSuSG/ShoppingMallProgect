@@ -2,6 +2,7 @@ package SongGyun.ShoppingMallProject.service;
 
 import SongGyun.ShoppingMallProject.domain.Image;
 import SongGyun.ShoppingMallProject.domain.Item;
+import SongGyun.ShoppingMallProject.dto.ImageDto;
 import SongGyun.ShoppingMallProject.dto.ItemDto;
 import SongGyun.ShoppingMallProject.dto.CreateItemDto;
 import SongGyun.ShoppingMallProject.repository.ItemRepository;
@@ -30,24 +31,34 @@ public class ItemService {
         log.info("ItemService : findAllItems");
 
         return itemRepository.findAll().
-                stream().map(item -> item.toDto(item))
+                stream().map(item -> item.toDto())
                 .collect(Collectors.toList());
     }
 
     //상품 저장
     @Transactional
-    public void createItem(MultipartFile[] multipartFiles , String stringItemDto) throws IOException {
+    public void createItem(ItemDto itemDto , List<ImageDto> base64Images) throws IOException {
         log.info("ItemService : createItem");
-        Item item = new ObjectMapper().readValue(stringItemDto, CreateItemDto.class).toEntity();
-
         //이미지를 실제로 저장하고 이미지객체를 아이템과 연관시키기
-        for (MultipartFile multipartFile : multipartFiles) {
-            Image image = imageService.storeImage(multipartFile);
+        Item item = itemDto.toEntity();
+        for (ImageDto base64Image : base64Images) {
+            Image image = imageService.storeImage(base64Image);
             item.setImage(image);
         }
+
         itemRepository.save(item);
     }
 
+    //상품 상세 페이지를 위한
+    public ItemDto readItem(Long itemId) throws IOException {
+        log.info("ItemService : readItem");
 
+        Item item = itemRepository.findById(itemId).get();
+        List<ImageDto> imageDtoList = imageService.readImage(item);
+        ItemDto itemDto = item.toDto();
+        itemDto.setImageDtoList(imageDtoList);
 
+        return itemDto;
+
+    }
 }
