@@ -9,7 +9,7 @@ function Header(props){
 					<div className="header-left">
 						<ul>
 							<li>
-								<Link to="/login">로그인</Link>
+								<Link to="/login" className="link">로그인</Link>
 							</li>
 							<li>
 								마이페이지

@@ -1,19 +1,35 @@
 import React  from 'react';
 import './Login.css'
-
 import {Link, Route, Switch} from 'react-router-dom';
+import axios from 'axios';
+
 function Login(props){
     return(
         <div className='login'>
 					<h3>회원 로그인</h3>
 					
 					<div className="login-box">
-						<form action='' method="" onSubmit={(e)=>{
-							
+						<form onSubmit={(e)=>{
+							e.preventDefault();
+							axios.post('/login',{
+								loginId : e.target.loginId.value,
+								password : e.target.password.value
+							})
+							.then((res)=>{
+								if(res.status===200){ //성공
+									console.log(res.status,res.data);
+								}
+								else if(res.status===412){//실패
+									console.log(res.status,res.data);
+								}
+							})
+							.catch((err)=>{
+								console.log(err);
+							})
 						}}>
 							<div className='id-container'>
 								<div className="id">아이디</div>
-								<input type="text" name="id"/>
+								<input type="text" name="loginId"/>
 							</div>
 							<div className='pw-container'>
 								<div className="pw">비밀번호</div>

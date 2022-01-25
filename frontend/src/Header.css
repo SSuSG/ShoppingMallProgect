@@ -9,11 +9,18 @@
 }
 
 .header-left ul{
-    display: flex;
+    text-align : center;
+    vertical-align: middle;
+    margin : 0;
 }
 .header-left li{
     list-style: none;
     padding-right : 8px;
+    display : inline-block;
+}
+.link{
+    text-decoration: none;
+    color : black;
 }
 .header-right{
   

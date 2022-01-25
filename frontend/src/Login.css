@@ -1,11 +1,14 @@
 .login{
-    
     width: 500px;
     margin : 0 auto;
     padding: 50px;
     color: #2e2e2e;
     border: 1px solid #dddddd;
     margin-top:15px;
+}
+.login h3{
+    font-size : 15px;
+    font-weight: bold;
 }
 .id{
     float:left;
