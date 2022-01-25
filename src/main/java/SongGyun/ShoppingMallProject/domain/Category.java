@@ -1,9 +1,6 @@
 package SongGyun.ShoppingMallProject.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +9,9 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@Setter
+@AllArgsConstructor
 public class Category {
 
     @Id
@@ -26,11 +25,14 @@ public class Category {
     @JoinColumn(name = "par_category_id")
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parentCategory" , cascade = CascadeType.ALL)
     private List<Category> childCategory;
 
     @OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)
     private List<Item> itemList = new ArrayList<>();
+
+    public Category() {
+    }
 
     //==연관관계 편의 메소드==//
 

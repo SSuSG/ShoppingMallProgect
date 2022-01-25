@@ -29,6 +29,9 @@ public class MemberController {
     private final QaService qaService;
     private final ReviewService reviewService;
 
+
+
+
     //회원가입
     @PostMapping("/join")
     public boolean createMember(@Valid @RequestBody JoinDto joinDto , BindingResult result) throws Exception {
@@ -46,8 +49,8 @@ public class MemberController {
     }
 
     //아이디 중복체크
-    @GetMapping("/join/id")
-    public boolean checkLoginIdDuplicate(@RequestBody String loginId) {
+    @GetMapping("/join/{loginId}")
+    public boolean checkLoginIdDuplicate(@PathVariable String loginId) {
         log.info("memberController : checkLoginIdDuplicate");
         //true -> 아이디중복 , false -> 아이디중복 없음
         return memberService.checkLoginIdDuplicate(loginId);
