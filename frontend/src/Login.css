@@ -54,3 +54,24 @@
 .id-container{
     margin-bottom: 15px;
 }
+.emailModal-top{
+    margin : 0 auto;
+    margin-top : 25px;
+    width : 500px;
+    height: 50px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(13 110 253 / 25%);
+}
+.emailModal-top p{
+    display: inline-block;
+    margin-top : 5px;
+    margin-bottom : 5px;
+    margin-right : 45px;
+}
+.emailModal-top input{
+    margin-right: 20px;
+}

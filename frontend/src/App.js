@@ -2,34 +2,34 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import Header from './Header';
 import Title from './Title';
+import Goods from './Goods';
 import Nav from './Nav';
 import {Link, Route, Switch} from 'react-router-dom';
 import Login from './Login';
 import Join from './Join';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { AuthProvider } from './AuthContext';
+import ProtectedRoute from './ProtectedRoute';
 function App() {
-
-  const [message, setMessage] = useState("");
-  useEffect(() => {
-    axios.get('/admin/members')
-        .then((res) => {
-          setMessage(res.data);
-        });
-  },[])
+  let [loginOrlogout, loginOrlogout변경] = useState('로그인');
 
   return (
+    <AuthProvider>
       <div className="App">
-        
-        <Header />
+        <Header loginOrlogout={loginOrlogout}/>
         <Title />
         <Nav />
         {/* {console.log(message)} */}
-				<Route exact path="/" />
-				<Route path="/login" component={Login} />
+				<ProtectedRoute path="/">
+          <Goods />
+        </ProtectedRoute>
+				<Route path="/login">
+          <Login loginOrlogout변경={loginOrlogout변경}/>  
+        </Route>
         <Route path="/join" component={Join} />
-        
       </div>
+    </AuthProvider>
   )
 }
 

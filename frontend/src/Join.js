@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 function Join(props){
-		let [emailModal,emailModal변경] = useState(false);
+		
 		let [loading, loading변경] = useState(false);
 
     return(
@@ -27,8 +27,6 @@ function Join(props){
 										phoneNum : e.target.phoneNum.value,
 									}).then((res)=>{
 										console.log(res.status, res.data);
-										loading변경(false);
-										emailModal변경(true);
 									}).catch((err)=>{
 										console.log(err);
 									})
@@ -76,11 +74,11 @@ function Join(props){
 									</tr>
 								</table>
 								<div className='join-button-container'>
-									<input type="submit" value="회원가입" className="join-button" onClick={()=>{loading변경(true)}}/>
+									<input type="submit" value="회원가입" className="join-button" />
 								</div>
 							</form>
-							{ emailModal===true?<EmailModal />:null}
-							<Loading loading={loading} />
+							
+						
 						</div>
 {/* 					
 						<form onSubmit={(e)=>{
@@ -123,19 +121,7 @@ function Join(props){
     );
 }
 
-function EmailModal(props){
 
-	return(
-		<div className="emailModal-top">
-			<form>
-				<p>
-					이메일 인증번호 <input type="text" name="code"/>
-				</p>
-				<input type="submit" value="인증하기" />
-			</form>
-		</div>
-	);
-}
 
 function Loading(props){
 
