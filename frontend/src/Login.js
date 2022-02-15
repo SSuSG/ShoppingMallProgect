@@ -8,11 +8,11 @@ import AuthContext from './AuthContext';
 
 function Login(props){
 	
-	let[emailModal, emailModal변경] = useState(true);
+	let[ emailModal, emailModal변경 ] = useState(true);
 
 	const { authToken, setAuthToken } = useContext(AuthContext);
 	
-	if (authToken){
+	if (authToken){	
 		props.loginOrlogout변경('로그아웃');
 		return <Redirect to="/" />;
 	}
@@ -71,7 +71,7 @@ function Login(props){
 					</div>
 				
         </div>
-				{ emailModal===true?<EmailModal />:null}
+				{ emailModal===true? <EmailModal />:null}
 			</>
 
     );
