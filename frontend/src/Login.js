@@ -41,6 +41,7 @@ function Login(props){
 								}
 								else if(res.data===300){ //준회원이면 300 -> 이메일 인증화면 띄워주기
 									emailModal변경(true);
+									spinnerModal변경(false);
 									alert('이메일 인증코드를 입력해주세요');
 								} 
 								else if(res.data===412){//실패
@@ -80,21 +81,32 @@ function Login(props){
 }
 
 function EmailModal(props){
-
+	let [spinner,spinner변경] = useState(false);
 	return(
 		<div className="emailModal-top">
 			<form onSubmit={(e)=>{
 				e.preventDefault();
+				spinner변경(true);
 				axios.post('/join/mail',{
-					
+					authenticationKey : e.target.authenticationKey.value
+				})
+				.then((res)=>{
+					alert(res.data)
+				})
+				.catch((err)=>{
+					console.log(err)
 				})
 			}}>
 				<p className="emailModal-context">
 					이메일 인증번호 
 				</p>
-				<input type="text" name="code"/>
+				<input type="text" name="authenticationKey"/>
 				<input type="submit" value="인증하기" />
 			</form>
+			{spinner===true
+			?<Spinner animation="grow" variant="light" />
+			:null
+			}
 		</div>
 	);
 }

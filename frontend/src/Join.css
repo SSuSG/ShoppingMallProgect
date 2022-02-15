@@ -47,6 +47,13 @@ th, td {
     padding: 10px 0 8px 10px;
 }
 .spinner-top{
+    vertical-align: middle;
+    display: inline-block;
+}
+.loading-container{
     text-align: center;
-    margin-top: 15px;
+}
+.loading{
+    display : inline-block;
+    vertical-align: middle;
 }

@@ -1,6 +1,6 @@
 import React,{useState}  from 'react';
 import './Join.css'
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link, Route, Switch, Redirect, useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -8,7 +8,7 @@ import axios from 'axios';
 function Join(props){
 		
 		let [loading, loading변경] = useState(false);
-
+		const history = useHistory();
     return(
 					<div className="join-container">
 						
@@ -19,6 +19,7 @@ function Join(props){
 						<div className='table-top'>
 							<form onSubmit={(e)=>{
 									e.preventDefault();
+									loading변경(true);
 									axios.post('/join',{
 										name : e.target.name.value,
 										loginId : e.target.loginId.value,
@@ -26,7 +27,10 @@ function Join(props){
 										email : e.target.email.value,
 										phoneNum : e.target.phoneNum.value,
 									}).then((res)=>{
+										alert('회원가입 완료!')
 										console.log(res.status, res.data);
+										loading변경(false);
+										history.push('/login');
 									}).catch((err)=>{
 										console.log(err);
 									})
@@ -77,7 +81,7 @@ function Join(props){
 									<input type="submit" value="회원가입" className="join-button" />
 								</div>
 							</form>
-							
+							<Loading loading={loading} /> 
 						
 						</div>
 {/* 					
@@ -127,10 +131,14 @@ function Loading(props){
 
 	if(props.loading===true)
 		return(
-		<div className="spinner-top">
-		<div class="spinner-border" role="status">
-			<span class="visually-hidden">Loading...</span>
-		</div>
+		<div className="loading-container">
+			<div className="loading">회원가입 중 입니다...&nbsp;</div>
+			
+				<div className="spinner-top">
+					<div class="spinner-border" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
+				</div>
 		</div>
 		);
 	return null;

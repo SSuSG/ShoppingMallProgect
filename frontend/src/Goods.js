@@ -1,5 +1,5 @@
 import React,{useState}  from 'react';
-import './Join.css'
+import './Goods.css'
 
 function Goods(){
     return(
