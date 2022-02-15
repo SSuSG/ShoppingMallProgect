@@ -7,15 +7,23 @@ function Header(props){
 		
 	const { authToken, setAuthToken } = useContext(AuthContext);
 
+	function LoginLogout(token){
+		if(token===null)
+			return(
+				<Link to="/login" className="link">로그인</Link>
+			)
+		else
+			return(
+				<div className="logout" onClick={()=>{Cookies.remove('token'); setAuthToken(null);}}>로그아웃</div>
+			)
+	}
     return(
         <div className='header-top'>
 					<div className="header-left">
 						<ul>
 							<li>
 								{
-								props.loginOrlogout==='로그인'?
-								<Link to="/login" className="link">{props.loginOrlogout}</Link>
-								:<div className="logout" onClick={()=>{Cookies.remove('token'); setAuthToken(null);}}>{props.loginOrlogout}</div>
+									LoginLogout(authToken)
 								}
 							</li>
 							<li className="mypage">
