@@ -33,7 +33,8 @@
 }
 .login-box{
     position: relative;
-    margin-bottom: 15px;
+    
+    height : 100px;
 }
 .login-button{
     display: inline-block;
@@ -50,6 +51,22 @@
     height : 100%;
     border : none;
     cursor : pointer;
+}
+.join-box{
+    width : 500px;
+    height : 60px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+.join-box p{
+    color : white;
+    text-decoration: none;
+    margin : 0;
+    font-size: 13px;
+    
 }
 .id-container{
     margin-bottom: 15px;
@@ -74,4 +91,19 @@
 }
 .emailModal-top input{
     margin-right: 20px;
+}
+.spinner-container{
+    background-color: white;
+    position : relative;
+    top : -73px;
+    right : -428px;
+    width : 73px;
+    height : 73px;
+}
+.spinner{
+    position : absolute;
+    left : 50%;
+    top : 50%;
+    margin-left:-15px;
+    margin-top:-17px;
 }

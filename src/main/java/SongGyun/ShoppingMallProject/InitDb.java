@@ -41,7 +41,7 @@ public class InitDb {
 
             Member member1 = Member.builder()
                     .name("에이비")
-                    .loginId("befoer")
+                    .loginId("before")
                     .password("1234")
                     .email("@naver")
                     .role(Role.BEFORE)

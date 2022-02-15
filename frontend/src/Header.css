@@ -57,8 +57,8 @@
     padding-bottom: 5px;
 }
 .mypage-detail ul li:hover{
-    color :blue;
-    
+    color : gray;
+    font-weight: bold;
 }
 .logout{
     cursor:pointer;

@@ -43,9 +43,7 @@ function Header(props){
 							</li>
 						</ul>
 					</div>
-					<div className="header-right">
-						<input type="text" />
-					</div>
+				
         </div>
     );
 

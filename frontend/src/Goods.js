@@ -4,7 +4,7 @@ import './Join.css'
 function Goods(){
     return(
         <div>
-            상품들
+            로그인 성공시 보여질 상품들
         </div>
     )
 }

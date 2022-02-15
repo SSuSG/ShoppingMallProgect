@@ -5,11 +5,11 @@ import axios from 'axios';
 import { useState, useContext } from 'react';
 import Cookies from 'js-cookie';
 import AuthContext from './AuthContext';
-
+import { Spinner } from 'react-bootstrap';
 function Login(props){
 	
-	let[ emailModal, emailModal변경 ] = useState(true);
-
+	let[ emailModal, emailModal변경 ] = useState(false);
+	let[ spinnerModal, spinnerModal변경] = useState(false);
 	const { authToken, setAuthToken } = useContext(AuthContext);
 	
 	if (authToken){	
@@ -24,26 +24,29 @@ function Login(props){
 					<div className="login-box">
 						<form onSubmit={(e)=>{
 							e.preventDefault();
+							spinnerModal변경(true);
 							axios.post('/login',{
 								loginId : e.target.loginId.value,
 								password : e.target.password.value
 							})
 							.then((res)=>{
-								if(res.status===200){ //일반회원
+								if(res.data===200){ //일반회원
 									console.log(res.status,res.data);
 									alert('일반회원 로그인 성공');
 									props.loginOrlogout변경('로그아웃');
 									const authToken = 'fdsojfspodijfosfjho';
 									setAuthToken(authToken);
 									Cookies.set('token', authToken);
+									spinnerModal변경(false);
 								}
-								else if(res.status===300){ //준회원이면 300 -> 이메일 인증화면 띄워주기
+								else if(res.data===300){ //준회원이면 300 -> 이메일 인증화면 띄워주기
 									emailModal변경(true);
 									alert('이메일 인증코드를 입력해주세요');
 								} 
-								else if(res.status===412){//실패
+								else if(res.data===412){//실패
 									console.log(res.status,res.data);
 									alert('로그인 실패');
+									spinnerModal변경(false);
 								}
 							})
 							.catch((err)=>{
@@ -62,13 +65,12 @@ function Login(props){
 								<input type='submit' value='Login'/>
 							</div>
 						</form>
+						{spinnerModal===true?<SpinnerModal />:null}
 					</div>
 
-					<div className='join-box'>
-						<Link to="/join">
-							<img src="https://www.boom-style.com/design/kr/login/join_btn.jpg" alt="" />
-						</Link>
-					</div>
+					<Link to='/join' className='join-box'>
+							<p>회원가입</p>
+					</Link>
 				
         </div>
 				{ emailModal===true? <EmailModal />:null}
@@ -81,7 +83,12 @@ function EmailModal(props){
 
 	return(
 		<div className="emailModal-top">
-			<form>
+			<form onSubmit={(e)=>{
+				e.preventDefault();
+				axios.post('/join/mail',{
+					
+				})
+			}}>
 				<p className="emailModal-context">
 					이메일 인증번호 
 				</p>
@@ -90,6 +97,14 @@ function EmailModal(props){
 			</form>
 		</div>
 	);
+}
+
+function SpinnerModal(){
+	return(
+		<div className='spinner-container'>	
+			<Spinner animation="border" className="spinner"/>
+		</div>
+	)
 }
 
 export default Login
