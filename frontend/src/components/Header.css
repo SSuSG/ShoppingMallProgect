@@ -35,14 +35,13 @@
     display : inline-block;
 }
 .mypage-detail{
-    width: 100px;
+    width: 75px;
     height: 80px;
     border: 1px solid #000;
     position : absolute;
     top : 15px;
-    right : 32px;
+    right : 62px;
     text-align: center;
-    vertical-align: center;
     background-color: white;
     display: none;
 }

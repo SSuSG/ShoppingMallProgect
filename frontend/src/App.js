@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import Header from './Header';
-import Title from './Title';
+import Header from './components/Header';
+import Title from './components/Title';
 import Goods from './Goods';
-import Nav from './Nav';
+import Nav from './components/Nav';
 import {Link, Route, Switch} from 'react-router-dom';
-import Login from './Login';
-import Join from './Join';
+import Login from './user/Login';
+import Join from './user/Join';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { AuthProvider } from './AuthContext';
@@ -21,6 +21,7 @@ function App() {
         <Title />
         <Nav />
         {/* {console.log(message)} */}
+        <Route exact path ="/" component={Goods} />
 				<ProtectedRoute path="/">
           <Goods />
         </ProtectedRoute>

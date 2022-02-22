@@ -2,7 +2,7 @@ import React,{useContext}  from 'react';
 import './Header.css'
 import {Link, Route, Switch} from 'react-router-dom';
 import Cookies from 'js-cookie';
-import AuthContext from './AuthContext';
+import AuthContext from '../AuthContext';
 function Header(props){
 		
 	const { authToken, setAuthToken } = useContext(AuthContext);
