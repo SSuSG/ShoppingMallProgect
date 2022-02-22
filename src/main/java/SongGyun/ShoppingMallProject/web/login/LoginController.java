@@ -44,6 +44,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_MEMBER , loginUser);
 
+        log.info("Role : {}" , loginUser.getRole());
         if(loginUser.getRole() == Role.BEFORE){
             return "300";
         }

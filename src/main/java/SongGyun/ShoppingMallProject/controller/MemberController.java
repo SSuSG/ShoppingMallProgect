@@ -57,15 +57,13 @@ public class MemberController {
     //이메일 인증
     @PostMapping("/join/mail")
     public String authenticationEmail(
-            @Login Member loginMember,
             @RequestBody AuthenticationKeyDto authenticationKeyDto
     ){
         log.info("memberController : authenticationEmail");
-        if(memberService.IsEqualAuthenticationKey(loginMember.getId(), authenticationKeyDto.getAuthenticationKey()) == true){
+        if(memberService.IsEqualAuthenticationKey(authenticationKeyDto))
             return "200";
-        }else{
+        else
             return "412";
-        }
     }
 
     //아이디 찾기

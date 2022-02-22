@@ -119,10 +119,11 @@ public class MemberService {
 
     //이메일 인증
     @Transactional
-    public boolean IsEqualAuthenticationKey(Long id, String authenticationKey) {
+    public boolean IsEqualAuthenticationKey(AuthenticationKeyDto authenticationKey) {
         log.info("memberService : IsEqualAuthenticationKey");
-        Member member = memberRepository.findById(id).get();
-        if(member.getAuthenticationKey().equals(authenticationKey)){
+        Member member = memberRepository.findByLoginIdAndPassword(authenticationKey.getLoginId(), authenticationKey.getPassword()).get();
+        log.info("authenticationKey : {}" , member.getAuthenticationKey());
+        if(member.getAuthenticationKey().equals(authenticationKey.getAuthenticationKey())){
             member.updateRoleTypeForJoin();
             return true;
         }
