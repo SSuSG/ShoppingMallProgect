@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import Header from './components/Header';
 import Title from './components/Title';
-import Goods from './Goods';
+import Goods from './components/Goods';
 import Nav from './components/Nav';
 import {Link, Route, Switch} from 'react-router-dom';
 import Login from './user/Login';
@@ -13,7 +13,7 @@ import { AuthProvider } from './AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 function App() {
   let [loginOrlogout, loginOrlogout변경] = useState('로그인');
-
+  
   return (
     <AuthProvider>
       <div className="App">

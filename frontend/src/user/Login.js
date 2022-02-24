@@ -100,7 +100,7 @@ function EmailModal(props){
 				.then((res)=>{
 					if(res.data===200){ //인증코드가 맞을 경우
 						spinner변경(false);
-						alert('인증코드가 맞습니다');
+						alert('인증코드가 일치합니다!');
 					}
 					else if(res.data===412){ //인증코드가 틀릴 경우
 						spinner변경(false);
@@ -114,7 +114,7 @@ function EmailModal(props){
 				<p className="emailModal-context">
 					이메일 인증번호 
 				</p>
-				<input type="text" name="authenticationKey"/>
+				<input type="password" name="authenticationKey"/>
 				<input type="submit" value="인증하기" />
 			</form>
 			{
